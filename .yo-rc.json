@@ -33,6 +33,8 @@
     "jhipsterVersion": "4.14.1",
     "packageFolder": "mr/rimrowad",
     "jwtSecretKey": "cd316f71cc8c4bc333014f515ccc27ddb2620d0e",
-    "jhiPrefix": "jhi"
+    "jhiPrefix": "jhi",
+    "herokuDeployType": "jar",
+    "herokuAppName": "pure-harbor-14712"
   }
 }

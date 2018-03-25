@@ -1,0 +1,89 @@
+
+<div *ngIf="projet">
+    <h2><span jhiTranslate="rimrowadApp.projet.detail.title">Projet</span> {{projet.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="rimrowadApp.projet.title">Title</span></dt>
+        <dd>
+            <span>{{projet.title}}</span>
+        </dd>
+        <dt><span jhiTranslate="rimrowadApp.projet.details">Details</span></dt>
+        <dd>
+            <span>{{projet.details}}</span>
+        </dd>
+        <dt><span jhiTranslate="rimrowadApp.projet.etudef">Etudef</span></dt>
+        <dd>
+            <div *ngIf="projet.etudef">
+                <a (click)="openFile(projet.etudefContentType, projet.etudef)" jhiTranslate="entity.action.open">open</a>
+                {{projet.etudefContentType}}, {{byteSize(projet.etudef)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="rimrowadApp.projet.etude2">Etude 2</span></dt>
+        <dd>
+            <div *ngIf="projet.etude2">
+                <a (click)="openFile(projet.etude2ContentType, projet.etude2)" jhiTranslate="entity.action.open">open</a>
+                {{projet.etude2ContentType}}, {{byteSize(projet.etude2)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="rimrowadApp.projet.etude3">Etude 3</span></dt>
+        <dd>
+            <div *ngIf="projet.etude3">
+                <a (click)="openFile(projet.etude3ContentType, projet.etude3)" jhiTranslate="entity.action.open">open</a>
+                {{projet.etude3ContentType}}, {{byteSize(projet.etude3)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="rimrowadApp.projet.rendement">Rendement</span></dt>
+        <dd>
+            <span>{{projet.rendement}}</span>
+        </dd>
+        <dt><span jhiTranslate="rimrowadApp.projet.budget">Budget</span></dt>
+        <dd>
+            <span>{{projet.budget}}</span>
+        </dd>
+        <dt><span jhiTranslate="rimrowadApp.projet.delai">Delai</span></dt>
+        <dd>
+            <span>{{projet.delai}}</span>
+        </dd>
+        <dt><span jhiTranslate="rimrowadApp.projet.date">Date</span></dt>
+        <dd>
+            <span>{{projet.date | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="rimrowadApp.projet.status">Status</span></dt>
+        <dd>
+            <span jhiTranslate="{{'rimrowadApp.ProjetStatus.' + projet.status}}">{{projet.status}}</span>
+        </dd>
+        <dt><span jhiTranslate="rimrowadApp.projet.cible">Cible</span></dt>
+        <dd>
+            <span jhiTranslate="{{'rimrowadApp.Cible.' + projet.cible}}">{{projet.cible}}</span>
+        </dd>
+        <dt><span jhiTranslate="rimrowadApp.projet.type">Type</span></dt>
+        <dd>
+            <span jhiTranslate="{{'rimrowadApp.TypeProjet.' + projet.type}}">{{projet.type}}</span>
+        </dd>
+        <dt><span jhiTranslate="rimrowadApp.projet.equipe">Equipe</span></dt>
+        <dd>
+            <div *ngIf="projet.equipe">
+                <a [routerLink]="['/equipe', projet.equipe?.id]">{{projet.equipe?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="rimrowadApp.projet.user">User</span></dt>
+        <dd>
+            {{projet.user?.id}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'projet/'+ projet.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

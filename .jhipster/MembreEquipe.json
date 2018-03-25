@@ -1,0 +1,35 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "equipe",
+            "otherEntityName": "equipe",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "age",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "diplome",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "experience",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180325212422",
+    "entityTableName": "membre_equipe",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

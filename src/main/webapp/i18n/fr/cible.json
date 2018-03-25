@@ -1,0 +1,10 @@
+{
+    "rimrowadApp": {
+        "Cible" : {
+            "null": "",
+            "HOMME": "HOMME",
+            "FEMME": "FEMME",
+            "JEUNE": "JEUNE"
+        }
+    }
+}

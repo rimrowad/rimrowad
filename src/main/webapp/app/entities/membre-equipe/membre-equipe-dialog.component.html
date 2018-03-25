@@ -1,0 +1,52 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myMembreEquipeLabel" jhiTranslate="rimrowadApp.membreEquipe.home.createOrEditLabel">Create or edit a Membre Equipe</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!membreEquipe.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="membreEquipe.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rimrowadApp.membreEquipe.nom" for="field_nom">Nom</label>
+            <input type="text" class="form-control" name="nom" id="field_nom"
+                [(ngModel)]="membreEquipe.nom" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rimrowadApp.membreEquipe.age" for="field_age">Age</label>
+            <input type="number" class="form-control" name="age" id="field_age"
+                [(ngModel)]="membreEquipe.age" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rimrowadApp.membreEquipe.diplome" for="field_diplome">Diplome</label>
+            <input type="text" class="form-control" name="diplome" id="field_diplome"
+                [(ngModel)]="membreEquipe.diplome" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rimrowadApp.membreEquipe.experience" for="field_experience">Experience</label>
+            <input type="text" class="form-control" name="experience" id="field_experience"
+                [(ngModel)]="membreEquipe.experience" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rimrowadApp.membreEquipe.equipe" for="field_equipe">Equipe</label>
+            <select class="form-control" id="field_equipe" name="equipe" [(ngModel)]="membreEquipe.equipe" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="equipeOption.id === membreEquipe.equipe?.id ? membreEquipe.equipe : equipeOption" *ngFor="let equipeOption of equipes; trackBy: trackEquipeById">{{equipeOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

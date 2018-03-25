@@ -1,0 +1,99 @@
+<div>
+    <h2>
+        <span jhiTranslate="rimrowadApp.projet.home.title">Projets</span>
+        <button class="btn btn-primary float-right jh-create-entity create-projet" [routerLink]="['/', { outlets: { popup: ['projet-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="rimrowadApp.projet.home.createLabel">
+            Create new Projet
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="projets">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="rimrowadApp.projet.title">Title</span></th>
+            <th><span jhiTranslate="rimrowadApp.projet.details">Details</span></th>
+            <th><span jhiTranslate="rimrowadApp.projet.etudef">Etudef</span></th>
+            <th><span jhiTranslate="rimrowadApp.projet.etude2">Etude 2</span></th>
+            <th><span jhiTranslate="rimrowadApp.projet.etude3">Etude 3</span></th>
+            <th><span jhiTranslate="rimrowadApp.projet.rendement">Rendement</span></th>
+            <th><span jhiTranslate="rimrowadApp.projet.budget">Budget</span></th>
+            <th><span jhiTranslate="rimrowadApp.projet.delai">Delai</span></th>
+            <th><span jhiTranslate="rimrowadApp.projet.date">Date</span></th>
+            <th><span jhiTranslate="rimrowadApp.projet.status">Status</span></th>
+            <th><span jhiTranslate="rimrowadApp.projet.cible">Cible</span></th>
+            <th><span jhiTranslate="rimrowadApp.projet.type">Type</span></th>
+            <th><span jhiTranslate="rimrowadApp.projet.equipe">Equipe</span></th>
+            <th><span jhiTranslate="rimrowadApp.projet.user">User</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let projet of projets ;trackBy: trackId">
+                <td><a [routerLink]="['../projet', projet.id ]">{{projet.id}}</a></td>
+                <td>{{projet.title}}</td>
+                <td>{{projet.details}}</td>
+                <td>
+                    <a *ngIf="projet.etudef" (click)="openFile(projet.etudefContentType, projet.etudef)" jhiTranslate="entity.action.open">open</a>
+                    <span *ngIf="projet.etudef">{{projet.etudefContentType}}, {{byteSize(projet.etudef)}}</span>
+                </td>
+                <td>
+                    <a *ngIf="projet.etude2" (click)="openFile(projet.etude2ContentType, projet.etude2)" jhiTranslate="entity.action.open">open</a>
+                    <span *ngIf="projet.etude2">{{projet.etude2ContentType}}, {{byteSize(projet.etude2)}}</span>
+                </td>
+                <td>
+                    <a *ngIf="projet.etude3" (click)="openFile(projet.etude3ContentType, projet.etude3)" jhiTranslate="entity.action.open">open</a>
+                    <span *ngIf="projet.etude3">{{projet.etude3ContentType}}, {{byteSize(projet.etude3)}}</span>
+                </td>
+                <td>{{projet.rendement}}</td>
+                <td>{{projet.budget}}</td>
+                <td>{{projet.delai}}</td>
+                <td>{{projet.date | date:'medium'}}</td>
+                <td jhiTranslate="{{'rimrowadApp.ProjetStatus.' + projet.status}}">{{projet.status}}</td>
+                <td jhiTranslate="{{'rimrowadApp.Cible.' + projet.cible}}">{{projet.cible}}</td>
+                <td jhiTranslate="{{'rimrowadApp.TypeProjet.' + projet.type}}">{{projet.type}}</td>
+                <td>
+                    <div *ngIf="projet.equipe">
+                        <a [routerLink]="['../equipe', projet.equipe?.id ]" >{{projet.equipe?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    {{projet.user?.id}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../projet', projet.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'projet/'+ projet.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'projet/'+ projet.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

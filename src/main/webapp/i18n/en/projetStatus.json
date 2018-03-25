@@ -1,0 +1,10 @@
+{
+    "rimrowadApp": {
+        "ProjetStatus" : {
+            "null": "",
+            "PENDING": "PENDING",
+            "CANCELED": "CANCELED",
+            "VALIDATED": "VALIDATED"
+        }
+    }
+}

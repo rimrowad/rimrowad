@@ -1,0 +1,148 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myProjetLabel" jhiTranslate="rimrowadApp.projet.home.createOrEditLabel">Create or edit a Projet</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!projet.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="projet.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rimrowadApp.projet.title" for="field_title">Title</label>
+            <input type="text" class="form-control" name="title" id="field_title"
+                [(ngModel)]="projet.title" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rimrowadApp.projet.details" for="field_details">Details</label>
+            <input type="text" class="form-control" name="details" id="field_details"
+                [(ngModel)]="projet.details" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rimrowadApp.projet.etudef" for="field_etudef">Etudef</label>
+            <div>
+                <div *ngIf="projet.etudef" class="form-text text-danger clearfix">
+                    <a class="pull-left" (click)="openFile(projet.etudefContentType, projet.etudef)" jhiTranslate="entity.action.open">open</a><br>
+                    <span class="pull-left">{{projet.etudefContentType}}, {{byteSize(projet.etudef)}}</span>
+                    <button type="button" (click)="projet.etudef=null;projet.etudefContentType=null;"
+                            class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_etudef" (change)="setFileData($event, projet, 'etudef', false)" jhiTranslate="entity.action.addblob"/>
+            </div>
+            <input type="hidden" class="form-control" name="etudef" id="field_etudef"
+                [(ngModel)]="projet.etudef" />
+            <input type="hidden" class="form-control" name="etudefContentType" id="field_etudefContentType"
+                [(ngModel)]="projet.etudefContentType" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rimrowadApp.projet.etude2" for="field_etude2">Etude 2</label>
+            <div>
+                <div *ngIf="projet.etude2" class="form-text text-danger clearfix">
+                    <a class="pull-left" (click)="openFile(projet.etude2ContentType, projet.etude2)" jhiTranslate="entity.action.open">open</a><br>
+                    <span class="pull-left">{{projet.etude2ContentType}}, {{byteSize(projet.etude2)}}</span>
+                    <button type="button" (click)="projet.etude2=null;projet.etude2ContentType=null;"
+                            class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_etude2" (change)="setFileData($event, projet, 'etude2', false)" jhiTranslate="entity.action.addblob"/>
+            </div>
+            <input type="hidden" class="form-control" name="etude2" id="field_etude2"
+                [(ngModel)]="projet.etude2" />
+            <input type="hidden" class="form-control" name="etude2ContentType" id="field_etude2ContentType"
+                [(ngModel)]="projet.etude2ContentType" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rimrowadApp.projet.etude3" for="field_etude3">Etude 3</label>
+            <div>
+                <div *ngIf="projet.etude3" class="form-text text-danger clearfix">
+                    <a class="pull-left" (click)="openFile(projet.etude3ContentType, projet.etude3)" jhiTranslate="entity.action.open">open</a><br>
+                    <span class="pull-left">{{projet.etude3ContentType}}, {{byteSize(projet.etude3)}}</span>
+                    <button type="button" (click)="projet.etude3=null;projet.etude3ContentType=null;"
+                            class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_etude3" (change)="setFileData($event, projet, 'etude3', false)" jhiTranslate="entity.action.addblob"/>
+            </div>
+            <input type="hidden" class="form-control" name="etude3" id="field_etude3"
+                [(ngModel)]="projet.etude3" />
+            <input type="hidden" class="form-control" name="etude3ContentType" id="field_etude3ContentType"
+                [(ngModel)]="projet.etude3ContentType" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rimrowadApp.projet.rendement" for="field_rendement">Rendement</label>
+            <input type="number" class="form-control" name="rendement" id="field_rendement"
+                [(ngModel)]="projet.rendement" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rimrowadApp.projet.budget" for="field_budget">Budget</label>
+            <input type="number" class="form-control" name="budget" id="field_budget"
+                [(ngModel)]="projet.budget" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rimrowadApp.projet.delai" for="field_delai">Delai</label>
+            <input type="number" class="form-control" name="delai" id="field_delai"
+                [(ngModel)]="projet.delai" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rimrowadApp.projet.date" for="field_date">Date</label>
+            <div class="d-flex">
+                <input id="field_date" type="datetime-local" class="form-control" name="date" [(ngModel)]="projet.date"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rimrowadApp.projet.status" for="field_status">Status</label>
+            <select class="form-control" name="status" [(ngModel)]="projet.status" id="field_status" >
+                <option value="PENDING">{{'rimrowadApp.ProjetStatus.PENDING' | translate}}</option>
+                <option value="CANCELED">{{'rimrowadApp.ProjetStatus.CANCELED' | translate}}</option>
+                <option value="VALIDATED">{{'rimrowadApp.ProjetStatus.VALIDATED' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rimrowadApp.projet.cible" for="field_cible">Cible</label>
+            <select class="form-control" name="cible" [(ngModel)]="projet.cible" id="field_cible" >
+                <option value="HOMME">{{'rimrowadApp.Cible.HOMME' | translate}}</option>
+                <option value="FEMME">{{'rimrowadApp.Cible.FEMME' | translate}}</option>
+                <option value="JEUNE">{{'rimrowadApp.Cible.JEUNE' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rimrowadApp.projet.type" for="field_type">Type</label>
+            <select class="form-control" name="type" [(ngModel)]="projet.type" id="field_type" >
+                <option value="SANTE">{{'rimrowadApp.TypeProjet.SANTE' | translate}}</option>
+                <option value="TRANSPORT">{{'rimrowadApp.TypeProjet.TRANSPORT' | translate}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rimrowadApp.projet.equipe" for="field_equipe">Equipe</label>
+            <select class="form-control" id="field_equipe" name="equipe" [(ngModel)]="projet.equipe" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="equipeOption.id === projet.equipe?.id ? projet.equipe : equipeOption" *ngFor="let equipeOption of equipes; trackBy: trackEquipeById">{{equipeOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="rimrowadApp.projet.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="projet.user" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="userOption.id === projet.user?.id ? projet.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,35 @@
+
+{
+    "rimrowadApp": {
+        "projet" : {
+            "home": {
+                "title": "Projets",
+                "createLabel": "Create a new Projet",
+                "createOrEditLabel": "Create or edit a Projet"
+            },
+            "created": "A new Projet is created with identifier {{ param }}",
+            "updated": "A Projet is updated with identifier {{ param }}",
+            "deleted": "A Projet is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Projet {{ id }}?"
+            },
+            "detail": {
+                "title": "Projet"
+            },
+            "title": "Title",
+            "details": "Details",
+            "etudef": "Etudef",
+            "etude2": "Etude 2",
+            "etude3": "Etude 3",
+            "rendement": "Rendement",
+            "budget": "Budget",
+            "delai": "Delai",
+            "date": "Date",
+            "status": "Status",
+            "cible": "Cible",
+            "type": "Type",
+            "equipe": "Equipe",
+            "user": "User"
+        }
+    }
+}

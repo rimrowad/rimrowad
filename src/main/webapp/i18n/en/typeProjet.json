@@ -1,0 +1,9 @@
+{
+    "rimrowadApp": {
+        "TypeProjet" : {
+            "null": "",
+            "SANTE": "SANTE",
+            "TRANSPORT": "TRANSPORT"
+        }
+    }
+}

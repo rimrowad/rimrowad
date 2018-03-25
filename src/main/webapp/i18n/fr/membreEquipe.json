@@ -1,0 +1,26 @@
+
+{
+    "rimrowadApp": {
+        "membreEquipe" : {
+            "home": {
+                "title": "MembreEquipes",
+                "createLabel": "Créer un nouveau Membre Equipe",
+                "createOrEditLabel": "Créer ou éditer un Membre Equipe"
+            },
+            "created": "Un nouveau Membre Equipe a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Membre Equipe avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Membre Equipe avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Membre Equipe {{ id }} ?"
+            },
+            "detail": {
+                "title": "Membre Equipe"
+            },
+            "nom": "Nom",
+            "age": "Age",
+            "diplome": "Diplome",
+            "experience": "Experience",
+            "equipe": "Equipe"
+        }
+    }
+}

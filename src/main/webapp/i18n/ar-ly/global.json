@@ -6,10 +6,10 @@
             "home": "الصفحة الرئيسية",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
-                "main": "الكيانات",
-                "equipe": "Equipe",
-                "membreEquipe": "Membre Equipe",
-                "projet": "Projet",
+                "main": "مكونات المشروع",
+                "equipe": "فرق العمل",
+                "membreEquipe": "أعضاء فريق العمل",
+                "projet": "المشروع",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -82,7 +82,7 @@
             }
         },
         "field": {
-            "id": "ID"
+            "id": "م"
         },
         "ribbon": {
             "dev":"تطوير"

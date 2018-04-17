@@ -3,9 +3,9 @@
     "rimrowadApp": {
         "membreEquipe" : {
             "home": {
-                "title": "Membre Equipes",
-                "createLabel": "Create a new Membre Equipe",
-                "createOrEditLabel": "Create or edit a Membre Equipe"
+                "title": "أعضاء فريق العمل",
+                "createLabel": "إضافة عضو للفريق",
+                "createOrEditLabel": "إنشاء أو إظهار عضو الفريق"
             },
             "created": "A new Membre Equipe is created with identifier {{ param }}",
             "updated": "A Membre Equipe is updated with identifier {{ param }}",
@@ -14,13 +14,13 @@
                 "question": "Are you sure you want to delete Membre Equipe {{ id }}?"
             },
             "detail": {
-                "title": "Membre Equipe"
+                "title": "أعضاء فريق العمل"
             },
-            "nom": "Nom",
-            "age": "Age",
-            "diplome": "Diplome",
-            "experience": "Experience",
-            "equipe": "Equipe"
+            "nom": "الإسم",
+            "age": "العمر",
+            "diplome": "الشهادة",
+            "experience": "التجربة",
+            "equipe": "الفريق"
         }
     }
 }

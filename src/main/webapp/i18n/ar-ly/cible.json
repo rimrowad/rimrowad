@@ -2,9 +2,9 @@
     "rimrowadApp": {
         "Cible" : {
             "null": "",
-            "HOMME": "HOMME",
-            "FEMME": "FEMME",
-            "JEUNE": "JEUNE"
+            "HOMME": "رجال",
+            "FEMME": "نساء",
+            "JEUNE": "شباب"
         }
     }
 }

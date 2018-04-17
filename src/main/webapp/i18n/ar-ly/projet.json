@@ -3,9 +3,9 @@
     "rimrowadApp": {
         "projet" : {
             "home": {
-                "title": "Projets",
-                "createLabel": "Create a new Projet",
-                "createOrEditLabel": "Create or edit a Projet"
+                "title": "المشروع",
+                "createLabel": "إنشاء مشروع جديد",
+                "createOrEditLabel": "إنشاء أو إظهار مشروع"
             },
             "created": "A new Projet is created with identifier {{ param }}",
             "updated": "A Projet is updated with identifier {{ param }}",
@@ -14,22 +14,22 @@
                 "question": "Are you sure you want to delete Projet {{ id }}?"
             },
             "detail": {
-                "title": "Projet"
+                "title": "المشروع"
             },
-            "title": "Title",
-            "details": "Details",
-            "etudef": "Etudef",
-            "etude2": "Etude 2",
-            "etude3": "Etude 3",
-            "rendement": "Rendement",
-            "budget": "Budget",
-            "delai": "Delai",
-            "date": "Date",
-            "status": "Status",
-            "cible": "Cible",
-            "type": "Type",
-            "equipe": "Equipe",
-            "user": "User"
+            "title": "إسم المشروع",
+            "details": "نبذة عن المشروع",
+            "etudef": "ملف دراسة الجدوي",
+            "etude2": "ملف المشروع1",
+            "etude3": "ملف المشروع2",
+            "rendement": "المردودية",
+            "budget": "ميزانية المشروع",
+            "delai": "مدة التنفيذ بالأشهر",
+            "date": "تاريخ إضافة المشروع",
+            "status": "حالة المشروع",
+            "cible": "الفئة المستهدفة",
+            "type": "نوع المشروع",
+            "equipe": "فريق المشروع",
+            "user": "المستخدم"
         }
     }
 }

@@ -24,7 +24,7 @@ public class Equipe implements Serializable {
 
     @Column(name = "nom")
     private String nom;
-    @ManyToOne private String user;
+    @ManyToOne private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -47,10 +47,10 @@ public class Equipe implements Serializable {
     public void setNom(String nom) {
         this.nom = nom;
     }
-    public String getUser() {
-        return user;
+    public User getUser() {
+        return this.user;
     }
-    public void setUser(User nom) {
+    public void setUser(User user) {
         this.user = user;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove

@@ -33,14 +33,14 @@ public class EquipeResource {
     private static final String ENTITY_NAME = "equipe";
 
     private final EquipeRepository equipeRepository;
-    private final mr.rimrowad.service.UserService  UserService;
+    private final mr.rimrowad.service.UserService  userService;
 
   
 
     public EquipeResource(EquipeRepository equipeRepository, mr.rimrowad.service.UserService userService) {
 		super();
 		this.equipeRepository = equipeRepository;
-		UserService = userService;
+		this.userService = userService;
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class EquipeResource {
         if (equipe.getId() != null) {
             throw new BadRequestAlertException("A new equipe cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        equipe.setUser(UserService.getUserWithAuthorities().get());
+        equipe.setUser(userService.getUserWithAuthorities().get());
         Equipe result = equipeRepository.save(equipe);
         return ResponseEntity.created(new URI("/api/equipes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

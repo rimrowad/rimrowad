@@ -1,9 +1,12 @@
 package mr.rimrowad.web.rest;
 
+
 import com.codahale.metrics.annotation.Timed;
 import mr.rimrowad.domain.Equipe;
 
 import mr.rimrowad.repository.EquipeRepository;
+import mr.rimrowad.security.AuthoritiesConstants;
+import mr.rimrowad.security.SecurityUtils;
 import mr.rimrowad.web.rest.errors.BadRequestAlertException;
 import mr.rimrowad.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -17,7 +20,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
-
+//import mr.rimrowad.security.*;
 /**
  * REST controller for managing Equipe.
  */
@@ -30,12 +33,17 @@ public class EquipeResource {
     private static final String ENTITY_NAME = "equipe";
 
     private final EquipeRepository equipeRepository;
+    private final mr.rimrowad.service.UserService  UserService;
 
-    public EquipeResource(EquipeRepository equipeRepository) {
-        this.equipeRepository = equipeRepository;
-    }
+  
 
-    /**
+    public EquipeResource(EquipeRepository equipeRepository, mr.rimrowad.service.UserService userService) {
+		super();
+		this.equipeRepository = equipeRepository;
+		UserService = userService;
+	}
+
+	/**
      * POST  /equipes : Create a new equipe.
      *
      * @param equipe the equipe to create
@@ -49,6 +57,7 @@ public class EquipeResource {
         if (equipe.getId() != null) {
             throw new BadRequestAlertException("A new equipe cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        equipe.setUser(UserService.getUserWithAuthorities().get());
         Equipe result = equipeRepository.save(equipe);
         return ResponseEntity.created(new URI("/api/equipes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -86,7 +95,12 @@ public class EquipeResource {
     @Timed
     public List<Equipe> getAllEquipes() {
         log.debug("REST request to get all Equipes");
+        if(SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) 
         return equipeRepository.findAll();
+        else
+        	return equipeRepository.findAllByUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        
+        			 			
         }
 
     /**

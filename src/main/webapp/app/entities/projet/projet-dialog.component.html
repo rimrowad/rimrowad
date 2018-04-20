@@ -126,14 +126,14 @@
             <label class="form-control-label" jhiTranslate="rimrowadApp.projet.equipe" for="field_equipe">Equipe</label>
             <select class="form-control" id="field_equipe" name="equipe" [(ngModel)]="projet.equipe" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="equipeOption.id === projet.equipe?.id ? projet.equipe : equipeOption" *ngFor="let equipeOption of equipes; trackBy: trackEquipeById">{{equipeOption.id}}</option>
+                <option [ngValue]="equipeOption.id === projet.equipe?.id ? projet.equipe : equipeOption" *ngFor="let equipeOption of equipes; trackBy: trackEquipeById">{{equipeOption.nom}}</option>
             </select>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="rimrowadApp.projet.user" for="field_user">User</label>
             <select class="form-control" id="field_user" name="user" [(ngModel)]="projet.user" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="userOption.id === projet.user?.id ? projet.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+                <option [ngValue]="userOption.id === projet.user?.id ? projet.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
             </select>
         </div>
     </div>

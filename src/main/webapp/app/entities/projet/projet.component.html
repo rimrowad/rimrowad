@@ -60,11 +60,11 @@
                 <td jhiTranslate="{{'rimrowadApp.TypeProjet.' + projet.type}}">{{projet.type}}</td>
                 <td>
                     <div *ngIf="projet.equipe">
-                        <a [routerLink]="['../equipe', projet.equipe?.id ]" >{{projet.equipe?.id}}</a>
+                        <a [routerLink]="['../equipe', projet.equipe?.id ]" >{{projet.equipe?.nom}}</a>
                     </div>
                 </td>
                 <td>
-                    {{projet.user?.id}}
+                    {{projet.user?.login}}
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

@@ -1,4 +1,5 @@
 package mr.rimrowad.web.rest;
+import org.apache.commons.io.FileUtils;
 
 import com.codahale.metrics.annotation.Timed;
 import mr.rimrowad.domain.Projet;
@@ -9,11 +10,15 @@ import mr.rimrowad.security.SecurityUtils;
 import mr.rimrowad.web.rest.errors.BadRequestAlertException;
 import mr.rimrowad.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+//import io.undertow.util.FileUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -73,7 +78,17 @@ public class ProjetResource {
         if (projet.getId() == null) {
             return createProjet(projet);
         }
+        byte[] file = projet.getEtudef();
+        Projet result1 = projetRepository.save(projet);
+        if(file != null) {
+            try {
+                FileUtils.writeByteArrayToFile(new File("C:\\Users\\nejma" + result1.getId() + ".pdf"), file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         Projet result = projetRepository.save(projet);
+        
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, projet.getId().toString()))
             .body(result);
@@ -91,7 +106,7 @@ public class ProjetResource {
         if(SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) 
         	return projetRepository.findAll();
             else
-            	return projetRepository.findProjetUserLogin(SecurityUtils.getCurrentUserLogin().get());
+            	return projetRepository.findProjetByUserLogin(SecurityUtils.getCurrentUserLogin().get());
           
        // return projetRepository.findAll();
         }

@@ -16,6 +16,6 @@ public interface ProjetRepository extends JpaRepository<Projet, Long> {
     @Query("select projet from Projet projet where projet.user.login =?1")
     List<Projet> findByUserIsCurrentUser();
 
-	List<Projet> findProjetUserLogin(String string);
+	List<Projet> findProjetByUserLogin(String string);
 
 }

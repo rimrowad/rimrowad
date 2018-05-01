@@ -1,0 +1,45 @@
+enum TypeProjet {
+	SANTE, TRANSPORT
+}
+
+entity Equipe {
+    nom String
+}
+entity MembreEquipe {
+    nom String,
+    age Integer,
+    diplome String,
+    experience String
+}
+
+// an ignored comment
+/** not an ignored comment */
+enum Cible{
+	HOMME, FEMME, JEUNE
+}
+entity Projet {
+	title String,
+	details String,
+	etudef Blob,
+    etude2 Blob,
+    etude3 Blob,
+	rendement Double,
+    budget Double,
+    delai Integer,
+    date Instant,
+    status ProjetStatus,
+    cible Cible,
+    type TypeProjet
+}
+
+enum ProjetStatus {
+    PENDING, 
+    CANCELED, VALIDATED
+}
+
+relationship ManyToOne {
+	
+    Projet{equipe} to Equipe,
+    MembreEquipe{equipe} to Equipe,
+    Projet{user} to User
+}

@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import mr.rimrowad.domain.MembreEquipe;
 
 import mr.rimrowad.repository.MembreEquipeRepository;
+import mr.rimrowad.security.AuthoritiesConstants;
+import mr.rimrowad.security.SecurityUtils;
 import mr.rimrowad.web.rest.errors.BadRequestAlertException;
 import mr.rimrowad.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -86,7 +88,11 @@ public class MembreEquipeResource {
     @Timed
     public List<MembreEquipe> getAllMembreEquipes() {
         log.debug("REST request to get all MembreEquipes");
-        return membreEquipeRepository.findAll();
+        if(SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) 
+        	return membreEquipeRepository.findAll();
+            else
+            	return membreEquipeRepository.findMebreEquipeByUserLogin(SecurityUtils.getCurrentUserLogin().get());
+            
         }
 
     /**

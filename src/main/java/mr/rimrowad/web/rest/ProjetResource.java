@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import mr.rimrowad.domain.Projet;
 
 import mr.rimrowad.repository.ProjetRepository;
+import mr.rimrowad.security.AuthoritiesConstants;
+import mr.rimrowad.security.SecurityUtils;
 import mr.rimrowad.web.rest.errors.BadRequestAlertException;
 import mr.rimrowad.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -86,7 +88,12 @@ public class ProjetResource {
     @Timed
     public List<Projet> getAllProjets() {
         log.debug("REST request to get all Projets");
-        return projetRepository.findAll();
+        if(SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) 
+        	return projetRepository.findAll();
+            else
+            	return projetRepository.findProjetUserLogin(SecurityUtils.getCurrentUserLogin().get());
+          
+       // return projetRepository.findAll();
         }
 
     /**

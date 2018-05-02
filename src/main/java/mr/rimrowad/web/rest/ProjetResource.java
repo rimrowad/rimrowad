@@ -3,7 +3,7 @@ import org.apache.commons.io.FileUtils;
 
 import com.codahale.metrics.annotation.Timed;
 import mr.rimrowad.domain.Projet;
-
+import mr.rimrowad.repository.FileRepository;
 import mr.rimrowad.repository.ProjetRepository;
 import mr.rimrowad.security.AuthoritiesConstants;
 import mr.rimrowad.security.SecurityUtils;
@@ -24,6 +24,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing Projet.
@@ -37,12 +38,15 @@ public class ProjetResource {
     private static final String ENTITY_NAME = "projet";
 
     private final ProjetRepository projetRepository;
+    private final FileRepository fileRepository;
 
-    public ProjetResource(ProjetRepository projetRepository) {
-        this.projetRepository = projetRepository;
-    }
 
-    /**
+    public ProjetResource(ProjetRepository projetRepository, FileRepository fileRepository) {
+		this.projetRepository = projetRepository;
+		this.fileRepository = fileRepository;
+	}
+
+	/**
      * POST  /projets : Create a new projet.
      *
      * @param projet the projet to create
@@ -56,11 +60,20 @@ public class ProjetResource {
         if (projet.getId() != null) {
             throw new BadRequestAlertException("A new projet cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        saveProjetFiles(projet);
         Projet result = projetRepository.save(projet);
         return ResponseEntity.created(new URI("/api/projets/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
+	private void saveProjetFiles(Projet projet) {
+		if(projet.getEtudef()!=null) {
+        	fileRepository.putFile(SecurityUtils.getCurrentUserLogin().get()+"_etudef", projet.getEtudef());
+        	projet.setEtudef(null);
+        
+        }
+	}
 
     /**
      * PUT  /projets : Updates an existing projet.
@@ -78,15 +91,7 @@ public class ProjetResource {
         if (projet.getId() == null) {
             return createProjet(projet);
         }
-        byte[] file = projet.getEtudef();
-        Projet result1 = projetRepository.save(projet);
-        if(file != null) {
-            try {
-                FileUtils.writeByteArrayToFile(new File("C:\\Users\\nejma" + result1.getId() + ".pdf"), file);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        saveProjetFiles(projet);
         Projet result = projetRepository.save(projet);
         
         return ResponseEntity.ok()
@@ -104,14 +109,19 @@ public class ProjetResource {
     public List<Projet> getAllProjets() {
         log.debug("REST request to get all Projets");
         if(SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) 
-        	return projetRepository.findAll();
+        	return projetRepository.findAll().stream().map(p -> addFiles(p)).collect(Collectors.toList());
             else
-            	return projetRepository.findProjetByUserLogin(SecurityUtils.getCurrentUserLogin().get());
+            	return projetRepository.findProjetByUserLogin(SecurityUtils.getCurrentUserLogin().get())
+            			.stream().map(p -> addFiles(p)).collect(Collectors.toList());
           
-       // return projetRepository.findAll();
         }
 
-    /**
+    private Projet addFiles(Projet p) {
+    	p.setEtudef(fileRepository.getFile(SecurityUtils.getCurrentUserLogin().get()+"_etudef"));
+		return p;
+	}
+
+	/**
      * GET  /projets/:id : get the "id" projet.
      *
      * @param id the id of the projet to retrieve
@@ -122,6 +132,7 @@ public class ProjetResource {
     public ResponseEntity<Projet> getProjet(@PathVariable Long id) {
         log.debug("REST request to get Projet : {}", id);
         Projet projet = projetRepository.findOne(id);
+        addFiles(projet);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(projet));
     }
 
